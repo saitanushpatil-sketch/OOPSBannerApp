@@ -1,13 +1,18 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * UC7 - OOPS Banner using Inner Class CharacterPattern
+ * UC8 - OOPS Banner using HashMap for Character Patterns
  * @author Lucky
- * @version 7.0
+ * @version 8.0
  */
 public class OOPSBannerApp {
 
     public static void main(String[] args) {
 
-        CharacterPattern o = new CharacterPattern('O', new String[]{
+        Map<Character, String[]> patternMap = new HashMap<>();
+
+        patternMap.put('O', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -17,7 +22,7 @@ public class OOPSBannerApp {
                 " ***** "
         });
 
-        CharacterPattern p = new CharacterPattern('P', new String[]{
+        patternMap.put('P', new String[]{
                 " ***** ",
                 "*     *",
                 "*     *",
@@ -27,7 +32,7 @@ public class OOPSBannerApp {
                 "*      "
         });
 
-        CharacterPattern s = new CharacterPattern('S', new String[]{
+        patternMap.put('S', new String[]{
                 " ***** ",
                 "*      ",
                 "*      ",
@@ -37,39 +42,20 @@ public class OOPSBannerApp {
                 " ***** "
         });
 
-        String[] oPattern = o.getPattern();
-        String[] pPattern = p.getPattern();
-        String[] sPattern = s.getPattern();
+        String word = "OOPS";
 
-        for (int i = 0; i < oPattern.length; i++) {
-            System.out.println(
-                    String.join("   ",
-                            oPattern[i],
-                            oPattern[i],
-                            pPattern[i],
-                            sPattern[i]
-                    )
-            );
-        }
-    }
+        for (int row = 0; row < 7; row++) {
 
-    // Static Inner Class
-    static class CharacterPattern {
+            StringBuilder line = new StringBuilder();
 
-        private char character;
-        private String[] pattern;
+            for (char ch : word.toCharArray()) {
 
-        public CharacterPattern(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+                String[] pattern = patternMap.get(ch);
 
-        public char getCharacter() {
-            return character;
-        }
+                line.append(pattern[row]).append("   ");
+            }
 
-        public String[] getPattern() {
-            return pattern;
+            System.out.println(line);
         }
     }
 }
